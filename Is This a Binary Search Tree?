@@ -1,0 +1,36 @@
+/* Hidden stub code will pass a root argument to the function below. Complete the function to solve the challenge. Hint: you may want to write one or more helper functions.  
+
+The Node struct is defined as follows:
+	struct Node {
+		int data;
+		Node* left;
+		Node* right;
+	}
+*/
+bool lftValueChk(Node * node, int val)
+{
+    if(node==NULL)
+        return true;
+    if(node->data<val && lftValueChk(node->left,val)&& lftValueChk(node->right,val))
+        return true;
+    else
+        return false;
+}
+bool rightValueChk(Node * node, int val)
+{
+    if(node==NULL)
+        return true;
+    if(node->data>val && rightValueChk(node->left,val)&& rightValueChk(node->right,val))
+        return true;
+    else
+        return false;
+}
+
+bool checkBST(Node* node) {
+    if(node==NULL)
+        return true;
+    if(lftValueChk(node->left,node->data)&&rightValueChk(node->right,node->data)&&checkBST(node->left)&&checkBST(node->right))
+    return true;
+    else
+        return false;
+}
