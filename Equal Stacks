@@ -1,0 +1,78 @@
+#include <map>
+#include <set>
+#include <list>
+#include <cmath>
+#include <ctime>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <string>
+#include <bitset>
+#include <cstdio>
+#include <limits>
+#include <vector>
+#include <climits>
+#include <cstring>
+#include <cstdlib>
+#include <fstream>
+#include <numeric>
+#include <sstream>
+#include <iostream>
+#include <algorithm>
+#include <unordered_map>
+
+using namespace std;
+
+int main(){
+    int n1;
+    int n2;
+    int n3;
+    int sum_first_cylinder=0;
+    int sum_second_cylinder=0;
+    int sum_third_cylinder=0;
+    cin >> n1 >> n2 >> n3;
+    vector<int> h1(n1);
+    for(int h1_i = 0;h1_i < n1;h1_i++){
+       cin >> h1[h1_i];
+        sum_first_cylinder+=h1[h1_i];
+    }
+    vector<int> h2(n2);
+    for(int h2_i = 0;h2_i < n2;h2_i++){
+       cin >> h2[h2_i];
+        sum_second_cylinder+=h2[h2_i];
+    }
+    vector<int> h3(n3);
+    for(int h3_i = 0;h3_i < n3;h3_i++){
+       cin >> h3[h3_i];
+        sum_third_cylinder+=h3[h3_i];
+    }
+    while(!(sum_first_cylinder==sum_second_cylinder && sum_first_cylinder==sum_third_cylinder))
+    {
+        if(sum_first_cylinder<sum_second_cylinder)
+        {
+            sum_second_cylinder-=h2[0];
+            h2.erase(h2.begin());
+            
+        }
+        if(sum_first_cylinder>sum_second_cylinder)
+        {
+            sum_first_cylinder-=h1[0];
+            h1.erase(h1.begin());
+            
+        }
+        if(sum_second_cylinder<sum_third_cylinder)
+        {
+            sum_third_cylinder-=h3[0];
+            h3.erase(h3.begin());
+            
+        }
+        if(sum_second_cylinder>sum_third_cylinder)
+        {
+            sum_second_cylinder-=h2[0];
+            h2.erase(h2.begin());
+            
+        }
+    }
+    cout<<sum_second_cylinder;
+  return 0;
+}
