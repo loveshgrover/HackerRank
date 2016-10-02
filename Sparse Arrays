@@ -1,0 +1,38 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner scan = new Scanner(System.in);
+        String input="";
+        String []query=new String[1000];
+        int N=scan.nextInt();
+        for(int i=0;i<N;i++)
+            input+="'"+scan.next()+"'";
+        int Q=scan.nextInt();
+        for(int i=0;i<Q;i++)
+        {
+                  query[i]=scan.next(); 
+        }
+        Pattern p;
+        Matcher matcher;
+        int count=0;
+        for(int i=0;i<Q;i++)
+        {
+            p=Pattern.compile("'"+query[i]+"'");
+            matcher=p.matcher(input);
+            
+            while(matcher.find())
+                count++;
+            System.out.println(count);
+            count=0;
+        }
+        
+        
+    }
+}
