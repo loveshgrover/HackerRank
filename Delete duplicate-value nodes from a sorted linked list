@@ -1,0 +1,34 @@
+/*
+  Remove all duplicate elements from a sorted linked list
+  Node is defined as 
+  struct Node
+  {
+     int data;
+     struct Node *next;
+  }
+*/
+Node* RemoveDuplicates(Node *head)
+{
+  // This is a "method-only" submission. 
+  // You only need to complete this method. 
+    Node * myList=(Node *)malloc(sizeof(Node));
+    myList->data=0;
+    myList->next=NULL;
+    Node * temp=myList;
+    while(head!=NULL)
+    {
+        if(head->data==temp->data)
+        {
+            head=head->next;
+        }
+        else
+        {
+            Node * t=(Node *)malloc(sizeof(Node));
+            t->data=head->data;
+            t->next=NULL;
+            temp->next=t;
+            temp=t;
+        }
+    }
+    return myList->next;
+}
