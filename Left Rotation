@@ -1,0 +1,58 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+void shift(int *a,int D,int N)
+{
+    for(int i=0;i<D;i++)
+    {
+        int temp=a[0];
+        for(int j=0;j<N-1;j++)
+        {
+            a[j]=a[j+1];
+        }
+        a[N-1]=temp;
+    }
+}
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    int N,D,a[100000];
+    cin>>N>>D;
+    for(int i=0;i<N;i++)
+        cin>>a[i];
+    int temp;
+    if(D%N==0)
+    {
+        D=0;
+    }
+    else if(D>N)
+    {
+        D=D%N;
+        shift(a,D,N);
+    }
+    else
+    {
+        if(N-D<=D)
+        {
+            D=N-D;
+        for(int i=0;i<D;i++)
+        {
+        temp=a[N-1];
+        for(int j=N-1;j>0;j--)
+        {
+            a[j]=a[j-1];
+        }
+        a[0]=temp;
+        }
+        }
+        else
+            shift(a,D,N);
+    }
+    
+    for(int i=0;i<N;i++)
+        cout<<a[i]<<" ";
+    return 0;
+}
