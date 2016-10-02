@@ -1,0 +1,49 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+      
+        int N,Q;
+        Scanner scan=new Scanner(System.in);
+        N=scan.nextInt();
+        ArrayList<ArrayList<Integer>> seqList=new ArrayList<ArrayList<Integer>>(N);
+        Q=scan.nextInt();
+        int lastAns=0,x,y,c,temp=0;
+        while(Q>0)
+        {
+            c=scan.nextInt();
+            x=scan.nextInt();
+            y=scan.nextInt();
+            switch(c){
+                case 1:
+                try
+                {
+                if(seqList.get(((x^lastAns)%N)).isEmpty());
+                    
+                }
+                catch(Exception e)
+                {
+                    int temp2=((x^lastAns)%N);
+                    while(temp2>=0)
+                    {
+                        seqList.add(new ArrayList<Integer>());
+                        temp2--;
+                    }
+                }
+                seqList.get(((x^lastAns)%N)).add(y);
+                break;
+                case 2:
+                lastAns=seqList.get(((x^lastAns)%N)).get(y%seqList.get(((x^lastAns)%N)).size());
+                System.out.println(lastAns);
+                break;
+            }
+        Q--;
+    }
+ }
+}
