@@ -1,0 +1,64 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <stdlib.h>
+using namespace std;
+struct queueStruct
+{
+    int data;
+    queueStruct *next;
+};
+queueStruct *last=NULL;
+queueStruct * enqueue(queueStruct *top,int data)
+{
+    queueStruct *temp=(queueStruct *)malloc(sizeof(queueStruct));
+    queueStruct *tempTop=top;
+    temp->data=data;
+    temp->next=NULL;
+    if(top==NULL)
+    {
+        top=temp;
+        last=temp;
+    }
+    else
+    {
+        last->next=temp;
+        last=temp;
+    }
+    return top;
+        
+}
+queueStruct * dequeue(queueStruct *top)
+{
+    return top->next;
+}
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    queueStruct * top=NULL;
+    
+    int N;
+    cin>>N;
+    while(N>0)
+    {
+        int type;
+        cin>>type;
+        switch(type)
+        {
+            case 1:
+                int data;
+                cin>>data;
+                top=enqueue(top,data);
+                break;
+            case 2:
+                top=dequeue(top);
+                break;
+            case 3:
+                cout<<top->data<<"\n";
+                break;
+        }
+        N--;
+    }
+    return 0;
+}
