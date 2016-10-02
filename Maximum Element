@@ -1,0 +1,64 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <stdlib.h>
+#include <limits.h>
+using namespace std;
+struct node
+{
+    int data;
+    node * next;
+};
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    node *top=NULL;
+    int N,Q,value;
+    int mx=INT_MIN;
+    bool isDelete=false;
+    node *temp;
+    cin>>N;
+    while(N>0)
+    {
+        cin>>Q;
+        switch(Q)        
+        {
+            case 1:
+                cin>>value;
+                temp=(node *)malloc(sizeof(node));
+                temp->data=value;
+                temp->next=top;
+                top=temp;
+                if(mx<top->data)
+                    mx=top->data;
+                break;
+            case 2:
+                if(mx==top->data)
+                {
+                    mx=INT_MIN;
+                    isDelete=true;
+                }
+                top=top->next;
+                break;
+            case 3:
+                node *temp2=top;
+                if(isDelete)
+                {
+                    mx=INT_MIN;
+                while(temp2!=NULL)
+                {
+                        if(temp2->data>mx)
+                        mx=temp2->data;
+                        temp2=temp2->next;
+                }
+                    isDelete=false;
+                }
+                cout<<mx<<"\n";
+                break;
+        }
+        N--;
+    }
+    return 0;
+}
