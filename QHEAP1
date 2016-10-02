@@ -1,0 +1,123 @@
+#include <climits>
+#include <iostream>
+
+using namespace std;
+
+void swap(int* a, int* b)
+    {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+class minHeap
+    {
+    public:
+        int* heapArray;
+        int cap;
+        int size;
+
+        //constructor
+        minHeap(int c)
+            {
+            heapArray = new int[c];
+        }
+
+       //parent
+        int parent(int i)
+            {
+            return (i-1) / 2;
+        }
+
+        //left child
+        int leftChild(int i)
+            {
+            return i*2 + 1;
+        }
+
+        //right child
+        int rightChild(int i)
+            {
+            return i*2 + 2;
+        }
+
+        //print root value (min value)
+        void printMin()
+            {
+            cout<<heapArray[0]<<endl; 
+        }
+        //insert
+        void insert(int val)
+            {
+            size++;
+            int i = size-1;
+            heapArray[i] = val;
+
+            while(i != 0 && heapArray[parent(i)] > heapArray[i])
+                {
+                swap(&heapArray[parent(i)], &heapArray[i]);
+
+                i = parent(i);
+            }
+        }
+
+        //heapifyMin
+        void heapifyMin(int i)
+            {
+            int left = leftChild(i);
+            int right = rightChild(i);
+            int min = i;
+
+            if(left < size && heapArray[left] < heapArray[i])
+                min = left;
+            if(right < size && heapArray[right] < heapArray[min])
+                min = right;
+
+            if(min != i)
+                {
+                swap(&heapArray[min], &heapArray[i]);
+                heapifyMin(min);   
+            }
+        }
+
+        //delete
+        void deleteKey(int val)
+            {
+            int i;
+            for(i = 0; i < size; i++)
+                if(heapArray[i] == val)
+                    break;
+
+            heapArray[i] = heapArray[size-1];
+            size--;
+
+            heapifyMin(i);
+        }
+};
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+    int n;
+    cin>>n;
+
+    minHeap h(n);
+
+    int a,b;
+    while(n--)
+        {
+        cin>>a;
+        if(a == 1)
+            {
+            cin>>b;
+            h.insert(b);
+        }
+        else if(a == 2)
+            {
+            cin>>b;
+            h.deleteKey(b);
+        }
+        else if(a == 3)
+            h.printMin();
+    }
+    return 0;
+}
