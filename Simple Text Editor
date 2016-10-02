@@ -1,0 +1,86 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+class StackTop
+{
+    public String value;
+}
+class StackData
+{
+
+    public String W;
+    public StackData next=null;
+}
+class StackOperation
+{
+    StackData push(StackData stack,String W)
+    {
+        StackData temp=new StackData();
+        temp.W=W;
+        if(stack==null)
+        {
+            stack=temp;
+        }
+        else
+        {
+            temp.next=stack;
+            stack=temp;
+        }
+        return stack;
+    }
+    StackData pop(StackData stack,StackTop st)
+    {
+        
+        if(stack!=null)
+        {
+            st.value=stack.W;
+            stack=stack.next;
+        }
+        else
+        {
+            st.value="";
+        }
+        return stack;
+    }
+}
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        StackData stackdata=null;
+        StackTop st=new StackTop();
+        StackOperation stackoperation=new StackOperation();
+        Scanner scanner = new Scanner(System. in);
+        int Q = scanner.nextInt();
+        String S="";
+        while(Q>0)
+        {
+            int type=scanner.nextInt();
+            switch(type)
+            {
+                case 1:
+                    String W=scanner.nextLine();
+                    stackdata=stackoperation.push(stackdata,S);
+                    S+=W.substring(1, W.length());
+                break;
+                case 2:
+                    int K = scanner.nextInt();
+                    stackdata=stackoperation.push(stackdata,S);
+                    S=S.substring(0, S.length()-K);
+                break;
+                case 3:
+                    int Kth = scanner.nextInt();
+                    System.out.println(S.charAt(Kth-1));
+                break;
+                case 4:
+                    stackdata=stackoperation.pop(stackdata,st);
+                S=st.value;
+                
+                break;
+            }
+            Q--;
+        }
+    }
+}
